@@ -27,27 +27,34 @@ class _HomePageState extends State<HomePage> {
       id: 'T001',
       description: 'Deadpool Funko-Pop',
       amount: 899.75,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 2)),
     ),
     Transaction(
       id: 'T002',
       description: 'Umbrella Academy Comics',
       amount: 1049.75,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 1)),
     ),
     Transaction(
       id: 'T003',
       description: 'Power to Influence',
       amount: 549.50,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 1)),
     ),
     Transaction(
       id: 'T004',
-      description: 'On such short notice',
+      description: 'JBL Speakers',
       amount: 478.85,
       date: DateTime.now(),
     ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return transactions.where((transaction) {
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransaction(String description, double amount) {
     final trx = Transaction(
@@ -84,9 +91,9 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: double.infinity,
                 margin: EdgeInsets.all(10),
-                child: Chart(),
+                child: Chart(transactions),
               ),
-              TransactionList(transactions),
+              TransactionList(_recentTransactions),
             ],
           ),
         ),
