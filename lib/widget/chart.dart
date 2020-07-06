@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widget/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -28,14 +29,23 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupedTransactions);
+    final totalWeekExpense =
+        groupedTransactions.fold(0, (sum, data) => sum + data['amount']);
+
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(10),
-      child: Row(
-        children: <Widget>[
-          Text('Chart Card'),
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(data['day'], data['amount'], totalWeekExpense),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
