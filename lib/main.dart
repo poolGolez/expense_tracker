@@ -56,11 +56,11 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String description, double amount) {
+  void _addNewTransaction(String description, double amount, DateTime transactionDate) {
     final trx = Transaction(
       description: description,
       amount: amount,
-      date: DateTime.now(),
+      date: transactionDate,
       id: DateTime.now().toString(),
     );
 

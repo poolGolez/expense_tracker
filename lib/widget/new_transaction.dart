@@ -75,10 +75,10 @@ class _NewTransactionState extends State<NewTransaction> {
             RaisedButton(
               child: Text('Add Transaction'),
               onPressed: () {
-                print(_descriptionTextController.text);
                 widget.addTransactionHandler(
                   _descriptionTextController.text,
                   double.parse(_amountTextController.text),
+                  _transactionDate
                 );
                 Navigator.of(context).pop();
               },
