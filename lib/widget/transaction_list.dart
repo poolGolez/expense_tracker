@@ -11,12 +11,14 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 500,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text('No Transactions'),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                     height: 250,
                     child: Image.asset(
@@ -29,40 +31,23 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final transaction = transactions[index];
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: 50,
-                        margin: EdgeInsets.all(5),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          color: Colors.deepOrangeAccent,
-                          width: 2,
-                          style: BorderStyle.solid,
-                        )),
-                        child: Text(
-                          '\$ ${transaction.amount}',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3.0,
+                  ),
+                  elevation: 3,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: FittedBox(
+                          child: Text("\$${transaction.amount}"),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            transaction.description,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(DateFormat().format(transaction.date)),
-                        ],
-                      )
-                    ],
+                    ),
+                    title: Text(transaction.description),
+                    subtitle: Text(DateFormat().format(transaction.date)),
                   ),
                 );
               },
