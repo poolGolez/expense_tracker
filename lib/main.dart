@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './domain/transaction.dart';
 import './widget/transaction_list.dart';
 import './widget/new_transaction.dart';
+import 'widget/chart.dart';
 
 void main() => runApp(ExpenseTrackerApp());
 
@@ -83,9 +84,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: double.infinity,
                 margin: EdgeInsets.all(10),
-                child: Card(
-                  child: Text('Chart'),
-                ),
+                child: Chart(),
               ),
               TransactionList(transactions),
             ],
