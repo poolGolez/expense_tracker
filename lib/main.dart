@@ -56,7 +56,8 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String description, double amount, DateTime transactionDate) {
+  void _addNewTransaction(
+      String description, double amount, DateTime transactionDate) {
     final trx = Transaction(
       description: description,
       amount: amount,
@@ -80,22 +81,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(title: Text('Expense Tracker'));
+    final availableHeight = MediaQuery.of(context).size.height -
+        (appBar.preferredSize.height + MediaQuery.of(context).padding.top);
+
     return Scaffold(
-      appBar: AppBar(title: Text('Expense Tracker')),
-      body: Container(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.all(10),
-                child: Chart(transactions),
-              ),
-              TransactionList(_recentTransactions),
-            ],
-          ),
+      appBar: appBar,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: availableHeight * 0.25,
+              width: double.infinity,
+              margin: EdgeInsets.all(10),
+              child: Chart(transactions),
+            ),
+            Container(
+              height: availableHeight * 0.75,
+              child: TransactionList(_recentTransactions),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
